@@ -5,7 +5,7 @@ coolingType_List = {'PASSIVE_COOLING' : {min: 0, max: 35},
 
 breach_Type_Msg = {'TOO_LOW' : 'too low', 'TOO_HIGH' : 'too high', 'NORMAL' : 'normal'}
 
-alert_Target_Type = {"TO_CONTROLLER" : send_to_controller, "TO_EMAIL" : send_to_email}
+alert_Target_Type = {"TO_CONTROLLER": send_to_controller, "TO_EMAIL" : send_to_email}
 
 def infer_breach(value, lowerLimit, upperLimit):
   if value < lowerLimit:
