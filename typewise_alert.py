@@ -3,6 +3,10 @@ coolingType_List = {'PASSIVE_COOLING' : {min: 0, max: 35},
                     'HI_ACTIVE_COOLING' : {min: 0, max: 45}, 
                     'MED_ACTIVE_COOLING' : {min: 0, max: 40}}
 
+breach_Type_Msg = {'TOO_LOW' : 'too low', 'TOO_HIGH' : 'too high', 'NORMAL' : 'normal'}
+
+alert_Target_Type = {'TO_CONTROLLER' : send_to_controller, 'TO_EMAIL' : send_to_email}
+
 def infer_breach(value, lowerLimit, upperLimit):
   if value < lowerLimit:
     return 'TOO_LOW'
@@ -22,10 +26,7 @@ def classify_temperature_breach(coolingType, temperatureInC):
 def check_and_alert(alertTarget, batteryChar, temperatureInC):
   breachType =\
     classify_temperature_breach(batteryChar['coolingType'], temperatureInC)
-  if alertTarget == 'TO_CONTROLLER':
-    send_to_controller(breachType)
-  elif alertTarget == 'TO_EMAIL':
-    send_to_email(breachType)
+  alert_Target_Type[alertTarget](breachType)
 
 
 def send_to_controller(breachType):
@@ -35,9 +36,5 @@ def send_to_controller(breachType):
 
 def send_to_email(breachType):
   recepient = "a.b@c.com"
-  if breachType == 'TOO_LOW':
-    print(f'To: {recepient}')
-    print('Hi, the temperature is too low')
-  elif breachType == 'TOO_HIGH':
-    print(f'To: {recepient}')
-    print('Hi, the temperature is too high')
+  print(f'To: {recepient}')
+  print('Hi, the temperature is', breach_Type_Msg[breachType])
