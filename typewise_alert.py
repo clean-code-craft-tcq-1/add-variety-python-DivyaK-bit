@@ -1,5 +1,5 @@
 
-coolingType_List = {'PASSIVE_COOLING' : {min: 0, max: 35}, 'HI_ACTIVE_COOLING' : {min: 0, max: 45}, 'MED_ACTIVE_COOLING' : {min: 0, max: 40}}
+coolingType_List = {'PASSIVE_COOLING':{lowerLimit: 0, upperLimit: 35}, 'HI_ACTIVE_COOLING':{lowerLimit: 0, upperLimit: 45}, 'MED_ACTIVE_COOLING':{lowerLimit: 0, upperLimit: 40}}
 
 breach_Type_Msg = {'TOO_LOW' : 'too low', 'TOO_HIGH' : 'too high', 'NORMAL' : 'normal'}
 
@@ -13,9 +13,7 @@ def infer_breach(value, lowerLimit, upperLimit):
 def classify_temperature_breach(coolingType, temperatureInC):
   if coolingType in coolingType_List and temperatureInC is not None:
     range = coolingType_List[coolingType]
-    lowerLimit = range['min']
-    upperLimit = range['max']
-    return infer_breach(temperatureInC, lowerLimit, upperLimit)
+    return infer_breach(temperatureInC, range['lowerLimit'], range['upperLimit'])
   else:
     return print("Please enter correct Input")
 
