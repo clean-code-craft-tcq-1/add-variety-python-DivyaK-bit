@@ -11,7 +11,7 @@ def infer_breach(value, lowerLimit, upperLimit):
   return 'NORMAL'
 
 def classify_temperature_breach(coolingType, temperatureInC):
-  if cooling_type in cooling_type_limits and temperatureInC is not None:
+  if coolingType in coolingType_List and temperatureInC is not None:
     range = coolingType_List[coolingType]
     lowerLimit = range['min']
     upperLimit = range['max']
@@ -39,6 +39,6 @@ alert_Target_Type = {"TO_CONTROLLER": send_to_controller, "TO_EMAIL" : send_to_e
 def check_and_alert(alertTarget, batteryChar, temperatureInC):
   breachType =\
     classify_temperature_breach(batteryChar['coolingType'], temperatureInC)
-  if breachType is not "NORMAL":
+  if breachType != "NORMAL":
     return alert_Target_Type[alertTarget](breachType)
   
