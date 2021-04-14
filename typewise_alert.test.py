@@ -13,6 +13,7 @@ class TypewiseTest(unittest.TestCase):
     self.assertTrue(typewise_alert.classify_temperature_breach(None, 40) == 'WRONG_VALUE')
     self.assertTrue(typewise_alert.classify_temperature_breach('HI_ACTIVE_COOLING', None) == 'WRONG_VALUE')
     self.assertTrue(typewise_alert.classify_temperature_breach('COOLING', 80) == 'WRONG_VALUE')
+    self.assertTrue(typewise_alert.classify_temperature_breach(None, None) == 'WRONG_VALUE')
         
   def test_alert_breaches(self):
     self.assertTrue(typewise_alert.check_and_alert('TO_CONTROLLER', {'coolingType': 'PASSIVE_COOLING'}, 120) == True)
