@@ -17,7 +17,7 @@ def classify_temperature_breach(coolingType, temperatureInC):
     range = coolingType_List[coolingType]
     return infer_breach(temperatureInC, range['lowerLimit'], range['upperLimit'])
   else:
-    return print("Please enter correct Input")
+    return "WRONG_VALUE"
 
 def send_to_controller(breachType):
   header = 0xfeed
